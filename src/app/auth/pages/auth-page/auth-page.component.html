@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+    <form 
+        [formGroup]="loginForm" 
+        (submit)="onSubmit()"
+        class="login-form shadow-sm p-3 mb-5 bg-white rounded" 
+        id="frm-login"
+    >
+        <div class="login-top">
+            <p>PAYMENT APP</p>
+            <small class="text-muted">Welcome! log in to continue</small>
+        </div>
+        <div class="login-body">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Email: </label>
+                    <input formControlName="email" class="form-control custom-field" id="txtCorreo" name="txtCorreo" type="text" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label>Password:</label>
+                    <input formControlName="passWord" class="form-control" id="txtContrasenia" name="txtContrasenia" type="password" />
+                </div>
+            </div>
+            <div class="form-check">
+                <input id="chk-remember" value="0" class="form-check-input" type="checkbox" name="Remember" />
+                <label class="form-check-label">
+                    Remember password
+                </label>
+            </div>
+            <div clas="form-row">
+                <div class="form-group mt-3 w-100 d-flex justify-content-between">
+                    <button id="btnIngresar" name="btnIngresar" type="submit" class="btn custom-btn-login">Login</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="loader" >loging please wait</div>
+
+    </form>
+</div>
