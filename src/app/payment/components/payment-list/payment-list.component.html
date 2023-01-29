@@ -32,16 +32,14 @@
       <th scope="col">Supplier name</th>
       <th scope="col">User email</th>
       <th scope="col">Amount</th>
-      <th scope="col">Accions</th>
     </tr>
   </thead>
   <tbody>
-    <tr style="cursor: pointer;" *ngFor="let item of viewModel">
+    <tr (click)="takeRow(item.paymentId)" style="cursor: pointer;" *ngFor="let item of viewModel">
       <td>{{ item.paymentId }}</td>
       <td>{{ item.supplierName }}</td>
       <td>{{ item.email }}</td>
       <td>{{ item.amount | currency}} {{  item.currency }}</td>
-      <td> <button (click)="deletePayment(item.paymentId)" type="button" class="btn btn-link text-danger">delete</button></td>
     </tr>
   </tbody>
 </table>

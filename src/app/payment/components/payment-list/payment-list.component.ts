@@ -4,7 +4,8 @@ import { PaymentService } from './../../services/payment.service';
 import { Component, OnInit } from '@angular/core';
 import paymentViewModel from '../../interfaces/paymentViewModel';
 import paymentQueryFilters from '../../interfaces/paymentQueryFilters';
-import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
 
 @Component({
   selector: 'app-payment-list',
@@ -27,6 +28,7 @@ export class PaymentListComponent implements OnInit {
     private fb: FormBuilder,
     private CatalogService: CatalogService,
     private PaymentService: PaymentService,
+    private modalService: NgbModal
   ) {
     this.buildForm();
   }
@@ -107,19 +109,21 @@ export class PaymentListComponent implements OnInit {
 
   }
 
-  public async deletePayment( id: number ){
-    console.log(id);
+  public takeRow(id: number) {
 
-    const question = await Swal.fire({ icon:'question', showConfirmButton: true, showCancelButton: true, title: "Are you sure you want to remove this payment?" });
+    this.PaymentService.getPaymentById(id).subscribe({
+      next: (subs) => {
+        const modalRef = this.modalService.open(PaymentModalComponent, { centered: true, });
+        modalRef.componentInstance.paymentId = id;
+        modalRef.componentInstance.updateModel = subs.data;
 
-    if (question.isConfirmed) {
-      this.PaymentService.deletePayments(id).subscribe({
-        next: (deleted) =>{
-          console.log(deleted);
-          this.startList();
-        }
-      })
-    }
+        modalRef.componentInstance.emmitDelete.subscribe((result:boolean) => {
+          if (result) {
+            this.startList();
+          }
+        })
+
+      }
+    })
   }
-
 }

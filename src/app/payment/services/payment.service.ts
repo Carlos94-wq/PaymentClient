@@ -1,12 +1,11 @@
-import { AuthService } from './../../auth/services/auth.service';
+import paymentQueryFilters from '../interfaces/paymentQueryFilters';
+import paymentViewModel from '../interfaces/paymentViewModel';
+import PaymentModel from '../interfaces/paymentModel';
+import ApiResponse from 'src/app/utils/apiResponse';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import ApiResponse from 'src/app/utils/apiResponse';
 import { environment } from 'src/environments/environment';
-import paymentQueryFilters from '../interfaces/paymentQueryFilters';
-import paymentViewModel from '../interfaces/paymentViewModel';
-import PaymentInsert from '../interfaces/paymentInsert';
 import { getLoggedUser } from 'src/app/utils/getLogedUser';
 
 @Injectable({
@@ -46,12 +45,21 @@ export class PaymentService {
     return this.http.get<ApiResponse<paymentViewModel[]>>(`${this.baseUrl}/payment`, { headers: this.headers, params });
   }
 
-  public postPayments(Modelinsert: PaymentInsert): Observable<ApiResponse<number>> {
+  public postPayments(Modelinsert: PaymentModel): Observable<ApiResponse<number>> {
     return this.http.post<ApiResponse<number>>(`${this.baseUrl}/payment`, Modelinsert, { headers: this.headers });
+  }
+
+  public putPayments(paymentId: number, model: PaymentModel): Observable<ApiResponse<number>> {
+    return this.http.put<ApiResponse<number>>(`${this.baseUrl}/payment/${paymentId}`, model, { headers: this.headers });
   }
 
   public deletePayments(paymentId: number): Observable<ApiResponse<number>> {
     return this.http.delete<ApiResponse<number>>(`${this.baseUrl}/payment/${paymentId}`, { headers: this.headers });
   }
+
+  public getPaymentById(paymentId: number): Observable<ApiResponse<PaymentModel>> {
+    return this.http.get<ApiResponse<PaymentModel>>(`${this.baseUrl}/payment/${paymentId}`, { headers: this.headers });
+  }
+
 
 }
