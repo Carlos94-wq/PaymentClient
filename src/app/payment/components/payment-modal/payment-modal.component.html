@@ -1,8 +1,45 @@
-<div class="modal-body">
-	
+<div class="p-3">
+	<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label>Amount</label>
+				<input 	
+					class="form-control" 
+					type="number"
+					min="0.0"
+					formControlName="amount"
+				>
+			</div>
+			<div class="form-group col-md-12">
+				<label>Currency</label>
+				<select 
+					class="form-control"
+					formControlName="currencyId" 
+				>
+					<option *ngFor="let item of currency" [value]="item.currencyId">{{ item.shorthand }}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-12">
+				<label>Supplier</label>
+				<select 
+					class="form-control"
+					formControlName="supplierId" 
+				>
+					<option *ngFor="let item of suppliers" [value]="item.supplierId">{{ item.supplierName }}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-12">
+				<label>Comments</label>
+				<textarea class="form-control" formControlName="comments" cols="30" rows="5"></textarea>
+			</div>
+			<div class="form-group col-md-12">
+				<button type="submit" class="btn btn-primary">
+					Save payment
+					<div *ngIf="loading"  class="spinner-grow text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+					  </div>
+				</button>
+			</div>
+		</div>
+	</form>
 </div>
-<div class="modal-footer">
-	<button type="button" class="btn btn-outline-dark">Save</button>
-</div>
-
-<div></div>

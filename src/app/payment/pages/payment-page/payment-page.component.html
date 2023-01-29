@@ -3,6 +3,10 @@
     <a class="navbar-brand" href="#">
         Payments
     </a>
+
+    <a style="cursor: pointer;" class="navbar-brand" (click)="logOut()">
+        Logout
+    </a>
 </nav>
 
 <br> <br>
@@ -10,12 +14,6 @@
     <button (click)="openPaymentModal()" type="button" class="btn btn-primary btn-lg">Add payment</button>
     <br> <br>
 
-    <app-payment-list
-    ></app-payment-list>
+    <app-payment-list></app-payment-list>
 
-    <ngb-pagination 
-        [(page)]="page" 
-        [pageSize]="pageSize" 
-        [collectionSize]="60"
-    ></ngb-pagination>
 </div>

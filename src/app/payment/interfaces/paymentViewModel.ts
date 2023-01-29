@@ -3,6 +3,7 @@ interface paymentViewModel{
      supplierName: number
      email: string
      amount: number
+     currency: string
 }
 
 export default paymentViewModel;

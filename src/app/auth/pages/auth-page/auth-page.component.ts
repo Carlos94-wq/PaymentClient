@@ -36,8 +36,6 @@ export class AuthPageComponent implements OnInit {
 
   public onSubmit() {
 
-    this.loader = !this.loader
-
     if (this.loginForm.invalid) {
       return;
     }
@@ -49,7 +47,8 @@ export class AuthPageComponent implements OnInit {
     this.AuthService.login(login).subscribe({
       next: ( subsResponse ) => {
         console.log(subsResponse);
-        this.Router.navigate(['/home/payment'])
+        this.loader = !this.loader
+        this.Router.navigate(['/home'])
       },
       error: (err) =>{ 
         this.loader = !this.loader

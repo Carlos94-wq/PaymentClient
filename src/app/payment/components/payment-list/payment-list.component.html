@@ -1,18 +1,54 @@
-<table class="table table-sm">
+<form
+  [formGroup]="filtersForm"
+  (submit)="onEmitFilters()"
+>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <input type="text" formControlName="email" class="form-control" placeholder="Register by Email">
+    </div>
+    <div class="form-group col-md-4">
+      <select formControlName="supplierId" class="form-control">
+        <option *ngFor="let item of supplier"  [value]="item.supplierId">{{ item.supplierName }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <input formControlName="paymentId" type="text" class="form-control" placeholder="Payment Id">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <button class="btn btn-primary btn-block" type="submit">Search</button>
+    </div>
+    <div class="form-group col-md-2">
+      <button class="btn btn-primary btn-block" (click)="clearFilters()" type="button">Celan filters</button>
+    </div>
+  </div>
+</form>
+
+<table class="table table-sm table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Supplier name</th>
       <th scope="col">User email</th>
       <th scope="col">Amount</th>
+      <th scope="col">Accions</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of viewModel">
+    <tr style="cursor: pointer;" *ngFor="let item of viewModel">
       <td>{{ item.paymentId }}</td>
       <td>{{ item.supplierName }}</td>
       <td>{{ item.email }}</td>
-      <td>{{ item.amount }}</td>
+      <td>{{ item.amount | currency}} {{  item.currency }}</td>
+      <td> <button (click)="deletePayment(item.paymentId)" type="button" class="btn btn-link text-danger">delete</button></td>
     </tr>
   </tbody>
 </table>
+
+<ngb-pagination 
+  [page]="page" 
+  [pageSize]="pageSize" 
+  [collectionSize]="collectionSize"
+  (pageChange)="onPageChange($event)"
+></ngb-pagination>

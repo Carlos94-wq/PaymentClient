@@ -13,11 +13,9 @@ import UserSession from '../interfaces/userSession';
 export class AuthService {
 
   private baseUrl: string;
-  private loggedUser: UserSession; 
 
   constructor(private http: HttpClient) { 
     this.baseUrl = environment.baseUrl;
-    this.loggedUser = JSON.parse(`${sessionStorage.getItem("user")}`)
   }
 
   private storeUser(session: UserSession){
@@ -34,9 +32,4 @@ export class AuthService {
       })
     )
   }
-
-  public getLoggedUser(): UserSession{
-    return this.loggedUser;
-  }
-
 }

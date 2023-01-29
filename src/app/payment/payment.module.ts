@@ -5,6 +5,7 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
 import { PaymentListComponent } from './components/payment-list/payment-list.component';
 import { NgbPaginationModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +19,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbPaginationModule,
     NgbModalModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ]
 })
 export class PaymentModule { }

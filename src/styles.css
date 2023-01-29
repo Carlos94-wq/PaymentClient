@@ -135,3 +135,7 @@
     width: 100%;
     background: #fff;
   }
+
+  .modal-backdrop {
+    z-index: 155!important;
+  }

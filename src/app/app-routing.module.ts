@@ -9,7 +9,8 @@ import { HomeComponent } from './shared/components/home/home.component';
 const APP_ROUTES: Routes = [
   { path: '', component: AuthPageComponent, },
   {
-    path: 'home', component: HomeComponent, canActivate: [AppGuard], children: [
+    path: 'home', component: HomeComponent, /* canActivate: [AppGuard], */ children: [
+      { path: '', redirectTo: 'payment', pathMatch: 'full' },
       { path: 'payment', component: PaymentPageComponent },
     ]
   },
